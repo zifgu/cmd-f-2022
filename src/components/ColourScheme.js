@@ -39,6 +39,10 @@ export function getHexCodeFromRGBArray(array) {
     return "#" + componentToHex(array[0]) + componentToHex(array[1]) + componentToHex(array[2]);
 }
 
+export function getRGBAFromRGBArray(array, alpha) {
+    return `rgba(${array[0]}, ${array[1]}, ${array[2]}, ${alpha})`;
+}
+
 // Assume hex strings are formatted like #FFFFFF
 function getRGBArrayFromHexCode(hexCode) {
     try {

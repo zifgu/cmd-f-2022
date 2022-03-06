@@ -10,7 +10,7 @@ import {
     getEmotion,
     getFeelingResponse, getParaphraseResponse,
 } from "./GetEmotions";
-import { getHexCodeFromRGBArray } from "./ColourScheme";
+import { getHexCodeFromRGBArray, getRGBAFromRGBArray } from "./ColourScheme";
 
 const { Configuration, OpenAIApi } = require("openai");
 
@@ -58,7 +58,6 @@ export function AppMain({ colorChanged, colorScheme }) {
 
         const addResponse = (resp, type) => {
             // Only display non-empty responses
-            console.log(resp)
             if (resp.length > 1) {
                 const obj = {
                     text: resp,
@@ -75,6 +74,11 @@ export function AppMain({ colorChanged, colorScheme }) {
 
                 newResponses.push(obj);
             }
+
+            newResponses.push({
+                text: resp,
+                type: type,
+            });
         }
 
         await Promise.all([
@@ -122,12 +126,14 @@ export function AppMain({ colorChanged, colorScheme }) {
 
     return (
         <div
-            className="py-3 px-4"
+            className="py-4 px-4"
             style={{
-                backgroundColor: getHexCodeFromRGBArray(colorScheme[0]),
+                border: "solid",
+                borderRadius: "15px",
+                borderColor: getHexCodeFromRGBArray(colorScheme[0]),
+                backgroundColor: getRGBAFromRGBArray(colorScheme[0], 0.8),
             }}
         >
-            <h1 className="text-center">Title</h1>
             <Input onSubmit={update} colorScheme={colorScheme} />
             <Emotions emotion={emotion} emoji={emoji} colorScheme={colorScheme}/>
             <Responses responses={responses} colorScheme={colorScheme}/>

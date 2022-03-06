@@ -11,6 +11,10 @@ import Popover from "react-bootstrap/Popover";
 import Button from "react-bootstrap/Button";
 import { getHexCodeFromRGBArray } from "./ColourScheme";
 
+export function isGoodResponse(response) {
+    return !!response;
+}
+
 export function Responses({ responses, colorScheme }) {
     return (
         <>
@@ -21,7 +25,9 @@ export function Responses({ responses, colorScheme }) {
             </Row>
             <Row className="g-2 row-cols-2">
                 {
-                    responses.sort((a, b) => a.type - b.type)
+                    responses
+                        .filter(isGoodResponse)
+                        .sort((a, b) => a.type - b.type)
                         .map((res) => (
                         <Col key={res.type}>
                             <ResponseCard
