@@ -4,21 +4,39 @@ export function getColourScheme(mainColor) {
     const url = "http://colormind.io/api/";
     const data = {
         model : "default",
-        input : ["N", "N", getRGBArrayFromHexCode(mainColor), "N", "N"]
-    }
+        input : [[240, 240, 240], "N", getRGBArrayFromHexCode(mainColor), "N", "N"]
+    };
 
-    const http = new XMLHttpRequest();
+    return new Promise((resolve, reject) => {
+        const http = new XMLHttpRequest();
 
-    http.onreadystatechange = function() {
-        if(http.readyState === 4 && http.status === 200) {
-            const palette = JSON.parse(http.responseText).result;
+        http.onreadystatechange = function() {
+            if(http.readyState == 4) {
+                if (http.status == 200) {
+                    const palette = JSON.parse(http.responseText).result;
+                    console.log(palette);
 
-            console.log(palette);
+                    resolve(palette);
+                } else {
+                    reject(http.readyState);
+                }
+            }
         }
-    }
 
-    http.open("POST", url, true);
-    http.send(JSON.stringify(data));
+        http.open("POST", url, true);
+        http.send(JSON.stringify(data));
+    });
+}
+
+// Source:
+// https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+function componentToHex(c) {
+    const hex = c.toString(16);
+    return hex.length === 1 ? "0" + hex : hex;
+}
+
+export function getHexCodeFromRGBArray(array) {
+    return "#" + componentToHex(array[0]) + componentToHex(array[1]) + componentToHex(array[2]);
 }
 
 // Assume hex strings are formatted like #FFFFFF

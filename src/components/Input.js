@@ -5,10 +5,11 @@ import Row from "react-bootstrap/Row";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Heading } from "./Common";
 import "../styles/input.css";
+import { getHexCodeFromRGBArray } from "./ColourScheme";
 
 const defaultRelationshipValue = "friend";
 
-export function Input({ onSubmit }) {
+export function Input({ onSubmit, colorScheme }) {
     const [message, setMessage] = useState("");
     const [relationship, setRelationship] = useState(defaultRelationshipValue);
 
@@ -23,7 +24,7 @@ export function Input({ onSubmit }) {
         <Row>
             <Col md={12}>
                 <Form>
-                    <Heading>
+                    <Heading colorScheme={colorScheme}>
                         My {relationshipInput} said to me ...
                     </Heading>
                     <MessageInput value={message} onValueChange={setMessage}/>
@@ -31,8 +32,11 @@ export function Input({ onSubmit }) {
             </Col>
             <Col md={12} className="text-end">
                 <Button
-                    variant="dark"
                     className="mt-3"
+                    style={{
+                        backgroundColor: getHexCodeFromRGBArray(colorScheme[3]),
+                        borderColor: getHexCodeFromRGBArray(colorScheme[4]),
+                    }}
                     onClick={() => onSubmit(relationship, message)}
                 >
                     Go!
@@ -48,7 +52,7 @@ function MessageInput({ value, onValueChange }) {
             as="textarea"
             rows={5}
             value={value}
-            className="fs-5 w-100 p-3 rounded-2 overflow-scroll message-input"
+            className="fs-5 w-100 p-3 overflow-scroll text-input message-input"
             onChange={(event) => {
                 onValueChange(event.target.value);
             }}

@@ -1,4 +1,5 @@
 import Container from "react-bootstrap/Container";
+import { getHexCodeFromRGBArray } from "./ColourScheme";
 
 const people = [
     {
@@ -15,18 +16,20 @@ const people = [
     },
 ];
 
-export function Footer() {
+export function Footer({ colorScheme }) {
     return (
-        <footer className="footer mt-auto border-top bg-light bg-opacity-10">
-            <Container className="py-4 text-center">
+        <footer className="footer mt-auto border-top bg-light bg-opacity-25">
+            <Container
+                className="py-4 text-center"
+            >
                 <p>
                     cmd-f 2022
                 </p>
                 <p>
-                    Created by: <TeamMembers />
+                    Created by: <TeamMembers colorScheme={colorScheme}/>
                 </p>
                 <p>
-                    Powered by: <FooterLink url={"https://openai.com/api/"} text={"OpenAI API"}/>
+                    Powered by: <FooterLink url={"https://openai.com/api/"} text={"OpenAI API"} colorScheme={colorScheme}/>
                 </p>
                 <p>
                     Made with React
@@ -36,7 +39,7 @@ export function Footer() {
     );
 }
 
-function TeamMembers() {
+function TeamMembers({ colorScheme }) {
     return (
         people.map((person, index, array) => {
             let preString = ", ";
@@ -49,13 +52,21 @@ function TeamMembers() {
             return (
                 <span key={person.name}>
                     {preString}
-                    <FooterLink url={person.url} text={person.name}/>
+                    <FooterLink url={person.url} text={person.name} colorScheme={colorScheme}/>
                 </span>
             );
         })
     );
 }
 
-function FooterLink({ url, text }) {
-    return <a href={url} className="text-info text-decoration-none">{text}</a>
+function FooterLink({ url, text, colorScheme }) {
+    return <a
+        href={url}
+        className="text-decoration-none"
+        style={{
+            color: getHexCodeFromRGBArray(colorScheme[3]),
+        }}
+    >
+        {text}
+    </a>
 }

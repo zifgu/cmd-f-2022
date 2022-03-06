@@ -11,6 +11,7 @@ import {
     getFeelingResponse,
     getParaphraseResponse
 } from "./GetEmotions";
+import { getHexCodeFromRGBArray } from "./ColourScheme";
 
 const { Configuration, OpenAIApi } = require("openai");
 
@@ -35,7 +36,7 @@ export const responseTypeInfo = {
     }
 };
 
-export function AppMain({ colorChanged }) {
+export function AppMain({ colorChanged, colorScheme }) {
     // Output feeling
     const [emotion, setEmotion] = useState(null);
     const [emoji, setEmoji] = useState(null);
@@ -108,11 +109,16 @@ export function AppMain({ colorChanged }) {
     }
 
     return (
-        <>
+        <div
+            className="py-3 px-4"
+            style={{
+                backgroundColor: getHexCodeFromRGBArray(colorScheme[0]),
+            }}
+        >
             <h1 className="text-center">Title</h1>
-            <Input onSubmit={update} />
-            <Emotions emotion={emotion} emoji={emoji}/>
-            <Responses responses={responses}/>
-        </>
+            <Input onSubmit={update} colorScheme={colorScheme} />
+            <Emotions emotion={emotion} emoji={emoji} colorScheme={colorScheme}/>
+            <Responses responses={responses} colorScheme={colorScheme}/>
+        </div>
     );
 }
