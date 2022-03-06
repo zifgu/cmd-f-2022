@@ -17,7 +17,7 @@ const people = [
 
 export function Footer() {
     return (
-        <footer className="footer mt-auto border-top bg-light">
+        <footer className="footer mt-auto border-top bg-light bg-opacity-10">
             <Container className="py-4 text-center">
                 <p>
                     cmd-f 2022

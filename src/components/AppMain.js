@@ -14,16 +14,13 @@ import {
 
 const { Configuration, OpenAIApi } = require("openai");
 
-export function AppMain() {
+export function AppMain({ colorChanged }) {
     // Output feeling
     const [emotion, setEmotion] = useState(null);
     const [emoji, setEmoji] = useState(null);
 
     // Output suggested responses
     const [responses, setResponses] = useState([]);
-
-    // UI setter
-    const [color, setColor] = useState("#FFECB3");
 
     // Compute the OpenAIApi interface once and store it for later
     const openai = useMemo(() => {
@@ -55,7 +52,7 @@ export function AppMain() {
                 })
                 .then((results) => {
                     setEmoji(results[0]);
-                    setColor(results[1]);
+                    colorChanged(results[1]);
                 }),
 
             // Query the basic response, then after we have it, get the emoji response
