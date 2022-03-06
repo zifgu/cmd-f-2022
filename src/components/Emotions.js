@@ -3,7 +3,7 @@ import Col from "react-bootstrap/Col";
 import { Heading } from "./Common";
 import ListGroup from "react-bootstrap/ListGroup";
 
-export function Emotions({ emotion }) {
+export function Emotions({ emotion, emoji }) {
     return (
         <Row>
             <Heading>
@@ -11,17 +11,21 @@ export function Emotions({ emotion }) {
             </Heading>
             <Col md={12}>
                 <ListGroup className="text-secondary">
-                    <Emotion emotion={emotion ?? "Not sure yet!"}/>
+                    <Emotion
+                        emotion={emotion ?? "Not sure yet!"}
+                        emoji={emoji}
+                    />
                 </ListGroup>
             </Col>
         </Row>
     );
 }
 
-function Emotion({ emotion }) {
+function Emotion({ emotion, emoji }) {
     return (
         <ListGroup.Item action className="border-0">
             { emotion }
+            {" "}{ emoji }
         </ListGroup.Item>
     );
 }

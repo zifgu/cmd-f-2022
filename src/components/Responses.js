@@ -16,11 +16,10 @@ export function Responses({ responses }) {
             </Row>
             <Row className="g-2 row-cols-2">
                 {
-                    responses.map((response) => (
-                        <Col key={response.text}>
+                    responses.map((res) => (
+                        <Col key={res}>
                             <ResponseCard
-                                responseText={response.text}
-                                responseBody={response.body}
+                                responseText={res}
                             />
                         </Col>
                     ))

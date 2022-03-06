@@ -2,9 +2,11 @@
 
 .response-card {
     font-family: 'Poppins';
-    position: absolute;
-    width: 374.11px;
-    height: 213.82px;
+    /*position: absolute;*/
+    /*width: 374.11px;*/
+    /*height: 213.82px;*/
+    width: 100%;
+    height: 100%;
     background-color: #C3F0E8;
 }
 
@@ -15,7 +17,7 @@
 .copy-button {
     font-family: 'Poppins';
     background-color: #A5A6F6;
-    position: absolute;
+    /*position: absolute;*/
     width: 59px;
     height: 57px;
     /*
@@ -38,7 +40,7 @@
 }
 
 .copy-button:after {
-    position: absolute;
+    /*position: absolute;*/
     content: "";
     width: 100%;
     height: 0;
