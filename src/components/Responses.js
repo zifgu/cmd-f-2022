@@ -52,10 +52,8 @@ export function ResponseCard({ responseText, responseType }) {
                 <Card.Text>{responseText}</Card.Text>
                 <CopyButton textToCopy={responseText}/>
                 <OverlayTrigger
-                    trigger="click"
                     placement="right"
                     overlay={popover}
-                    delay={{ show: 0, hide: 400 }}
                 >
                     <Button variant="outline-dark" className="float-end">Learn more</Button>
                 </OverlayTrigger>
