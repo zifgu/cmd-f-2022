@@ -1,5 +1,5 @@
 function parseFeeling(relationType, textMessage) {
-    return `My "${relationType}" said to me: "${textMessage}"\n My "${relationType}" is feeling:`;
+    return `My ${relationType} said to me: ${textMessage}\n My ${relationType} is feeling:`;
 }
 
 function parseEmoji(parsedFeeling) {
@@ -7,7 +7,7 @@ function parseEmoji(parsedFeeling) {
 }
 
 function generateBasicResponse(relationType, textMessage) {
-    return `"${relationType}": "${textMessage}"\n me:`;
+    return `${relationType}: ${textMessage}\n me:`;
 }
 
 function generateEmojiResponse(basicResponse) {
@@ -15,15 +15,15 @@ function generateEmojiResponse(basicResponse) {
 }
 
 function generateFeelingResponse(relationType, textMessage) {
-    return `My "${relationType}" said to me: "${textMessage}"\n Hearing this makes me feel: `;
+    return `My ${relationType} said to me: ${textMessage}\n Hearing this makes me feel: `;
 }
 
 function generateParaphraseResponse(textMessage) {
-    return `Paraphrase this for a second-grade student:\n"${textMessage}"\n`;
+    return `Paraphrase this for a second-grade student:\n${textMessage}\n`;
 }
 
 function getMoodColor(parsedEmotion) {
-    return `The CSS code for a color like "${parsedEmotion}":\n\n background-color:\n`;
+    return `The CSS code for a color like ${parsedEmotion}:\n\n background-color:\n`;
 }
 
 export async function getEmotion(openai, relationship, message) {
@@ -35,7 +35,6 @@ export async function getEmotion(openai, relationship, message) {
         frequency_penalty: 0.5,
         presence_penalty: 0,
     });
-
     return emotion.data.choices[0].text.trim();
 }
 
@@ -63,7 +62,6 @@ export async function getBasicResponse(openai, relationship, message) {
         presence_penalty: 0,
         stop: ["\n"],
     });
-
     return basicResponse.data.choices[0].text.trim();
 }
 

@@ -27,6 +27,7 @@ export function Responses({ responses, colorScheme }) {
                             <ResponseCard
                                 responseText={res.text}
                                 responseType={res.type}
+                                helpText={res.helpText}
                                 colorScheme={colorScheme}
                             />
                         </Col>
@@ -37,7 +38,17 @@ export function Responses({ responses, colorScheme }) {
     );
 }
 
-export function ResponseCard({ responseText, responseType, colorScheme }) {
+export function ResponseCard({ responseText, responseType, helpText, colorScheme }) {
+    let popoverText = responseTypeInfo[responseType].description;
+    if (helpText) {
+        popoverText = (
+            <>
+                {popoverText}
+                <br /><br/>
+                {helpText}
+            </>
+        );
+    }
 
     return (
         <Card
@@ -50,7 +61,7 @@ export function ResponseCard({ responseText, responseType, colorScheme }) {
             <Card.Body>
                 <Card.Title className="mt-1 mb-4">{responseText}</Card.Title>
                 <CopyButton textToCopy={responseText} colorScheme={colorScheme}/>
-                <OverlayButton popoverText={responseTypeInfo[responseType].description} colorScheme={colorScheme}/>
+                <OverlayButton popoverText={popoverText} colorScheme={colorScheme}/>
             </Card.Body>
         </Card>
     );
