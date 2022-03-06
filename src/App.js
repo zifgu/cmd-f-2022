@@ -4,40 +4,18 @@ import Col from "react-bootstrap/Col";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AppMain } from "./components/AppMain";
 import { Footer } from "./components/Footer";
-import { useState } from "react";
+import React, { useState } from "react";
 import { getColourScheme } from "./components/ColourScheme";
-import React,{Component,Fragment}from'react';
-import {Route} from'react-router-dom';
 import withSplashScreen from './components/withSplashScreen';
+import { Header } from "./components/Header";
 
 export const defaultColor = "#FFECB3";
 export const defaultColorScheme = [
-    [
-        232,
-        241,
-        236
-    ],
-    [
-        191,
-        216,
-        182
-    ],
-    [
-        249,
-        230,
-        177
-    ],
-    [
-        210,
-        110,
-        94
-    ],
-    [
-        149,
-        119,
-        115
-    ]
+    [237,244,244],[203,211,180],[245,231,184],[188,168,124],[131,125,105]
 ];
+
+const appTitle = "Me, An Empath";
+const appDescription = "Leveraging AI to detect emotional undertones.";
 
 function AppInner() {
     const [color, setColor] = useState(defaultColor);
@@ -49,6 +27,7 @@ function AppInner() {
             <Container className="pb-3">
                 <Row className="justify-content-center">
                     <Col md={9}>
+                        <Header title={appTitle} subtitle={appDescription} colorScheme={colorScheme}/>
                         <AppMain
                             colorChanged={async (color) => {
                                 setColor(color);
@@ -62,18 +41,6 @@ function AppInner() {
             <Footer colorScheme={colorScheme} />
         </div>
     );
-}
-
-class App extends Component{
-    render(){
-        return(
-            <Fragment>
-                <div className ="container-fluid">
-                    <Route path = "/"exactcomponent={AppInner}/>
-                </div>
-            </Fragment>
-        );
-    }
 }
 
 export default withSplashScreen(AppInner);

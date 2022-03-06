@@ -1,12 +1,12 @@
 // inspired by https://auth0.com/blog/creating-a-splash-screen-for-your-react-apps/
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import '../styles/splash-screen.css';
 
 function LoadingMessage() {
     return (
         <div className="splash-screen">
-            Meet an empath
+            Me, An Empath
             <div className="loading-dot">.</div>
         </div>
     );
