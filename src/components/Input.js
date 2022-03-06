@@ -15,7 +15,7 @@ export function Input({ onSubmit }) {
     const relationshipInput = (
         <RelationshipInput
             value={relationship}
-            onValueChange={(value) => setRelationship(value)}
+            onValueChange={setRelationship}
         />
     );
 
@@ -26,25 +26,33 @@ export function Input({ onSubmit }) {
                     <Heading>
                         My {relationshipInput} said to me ...
                     </Heading>
-                    <Form.Control as="textarea"
-                                  rows={5}
-                                  value={message}
-                                  className="w-100 p-3 rounded-2 overflow-scroll"
-                                  onChange={(event) => {
-                                      setMessage(event.target.value);
-                                  }}
-                                  style={{ resize: "none" }}
-                    />
+                    <MessageInput value={message} onValueChange={setMessage}/>
                 </Form>
             </Col>
             <Col md={12} className="text-end">
-                <Button className="mt-3"
-                        onClick={() => onSubmit(relationship, message)}
+                <Button
+                    className="mt-3"
+                    onClick={() => onSubmit(relationship, message)}
                 >
                     Go!
                 </Button>
             </Col>
         </Row>
+    );
+}
+
+function MessageInput({ value, onValueChange }) {
+    return (
+        <Form.Control
+            as="textarea"
+            rows={5}
+            value={value}
+            className="fs-5 w-100 p-3 rounded-2 overflow-scroll message-input"
+            onChange={(event) => {
+                onValueChange(event.target.value);
+            }}
+            style={{ resize: "none" }}
+        />
     );
 }
 
