@@ -17,6 +17,7 @@
 .copy-button {
     font-family: 'Poppins';
     background-color: #A5A6F6;
+    color: white;
     /*position: absolute;*/
     width: 59px;
     height: 57px;
@@ -31,7 +32,7 @@
 }
 
 .copy-button:hover {
-    color: #fff;
+    color: #fffad2;
 }
 
 .copy-button:hover:after {
