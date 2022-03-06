@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200i,400&display=swap");
+
+.response-card {
+    font-family: 'Poppins';
+    position: absolute;
+    width: 374.11px;
+    height: 213.82px;
+    background-color: #C3F0E8;
+}
+
+.response-card:hover {
+    background-color: #B1DAC6;
+}
+
+.copy-button {
+    font-family: 'Poppins';
+    background-color: #A5A6F6;
+    position: absolute;
+    width: 59px;
+    height: 57px;
+    /*
+    border: 5px solid #7D7D7D;
+    box-sizing: border-box;
+    */
+    border-radius: 13px;
+    background-image: linear-gradient(150deg, #A5A6F6 0%, #8B8CF5 74%);
+    border: none;
+    z-index: 1;
+}
+
+.copy-button:hover {
+    color: #fff;
+}
+
+.copy-button:hover:after {
+    top: 0;
+    height: 100%;
+}
+
+.copy-button:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: 13px;
+    background-color: #8D8FF0;
+    background-image: linear-gradient(315deg, #8D8FF0 0%, #D2D3F2 74%);
+    box-shadow:
+            -7px -7px 20px 0px #fff9,
+            -4px -4px 5px 0px #fff9,
+            7px 7px 20px 0px #0002,
+            4px 4px 5px 0px #0001;
+    transition: all 0.3s ease;
+}
+
+
+.copy-button:active {
+    top: 2px;
+
+}
