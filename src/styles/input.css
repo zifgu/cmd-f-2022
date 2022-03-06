@@ -1,0 +1,21 @@
+.text-input {
+    color: #6d757d;
+    opacity: 70%;
+    border: none;
+}
+
+.text-input:focus {
+    outline: none!important;
+    background-color: rgba(206, 212, 218, 15%);
+}
+
+.text-input:hover {
+    opacity: 100%;
+    background-color: rgba(206, 212, 218, 15%);
+}
+
+.relationship-input {
+    display: inline;
+    text-align: center;
+    border-bottom: 2px solid rgba(206, 212, 218, 80%);
+}

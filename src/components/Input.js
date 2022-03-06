@@ -1,0 +1,90 @@
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Heading } from "./Common";
+import "../styles/input.css";
+
+const defaultRelationshipValue = "friend";
+
+export function Input({ onSubmit }) {
+    const [message, setMessage] = useState("");
+    const [relationship, setRelationship] = useState(defaultRelationshipValue);
+
+    const relationshipInput = (
+        <RelationshipInput
+            value={relationship}
+            onValueChange={(value) => setRelationship(value)}
+        />
+    );
+
+    return (
+        <Row>
+            <Col md={12}>
+                <Form>
+                    <Heading>
+                        My {relationshipInput} said to me ...
+                    </Heading>
+                    <Form.Control as="textarea"
+                                  rows={5}
+                                  value={message}
+                                  className="w-100 p-3 rounded-2 overflow-scroll"
+                                  onChange={(event) => {
+                                      setMessage(event.target.value);
+                                  }}
+                                  style={{ resize: "none" }}
+                    />
+                </Form>
+            </Col>
+            <Col md={12} className="text-end">
+                <Button className="mt-3"
+                        onClick={() => onSubmit(relationship, message)}
+                >
+                    Go!
+                </Button>
+            </Col>
+        </Row>
+    );
+}
+
+function RelationshipInput({ value, onValueChange }) {
+    // Code to make the width dynamic:
+    // https://towardsdev.com/dynamic-input-length-react-component-536495154830
+
+    const [visible, setVisible] = useState(false);
+    const [width, setWidth] = useState(20);
+    const measurer = useRef();
+
+    useEffect(() => {
+        setVisible(true);
+    }, [value]);
+
+    useLayoutEffect(() => {
+        if (visible && measurer?.current) {
+            const rect = measurer.current.getBoundingClientRect();
+            setWidth(rect.width + 20);
+            setVisible(false);
+        }
+    }, [visible]);
+
+    return (
+        <>
+            <span ref={measurer}>
+                {visible && value}
+            </span>
+            <input
+                type="text"
+                className="text-input relationship-input"
+                value={value}
+                onChange={(event) => {
+                    onValueChange(event.target.value);
+                }}
+                maxLength={25}
+                style={{
+                    width: width,
+                }}
+            />
+        </>
+    );
+}
