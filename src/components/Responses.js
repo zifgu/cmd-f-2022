@@ -31,7 +31,7 @@ export function Responses({ responses }) {
 
 export function ResponseCard({ responseText, bodyText }) {
     return (
-        <Card className="shadow-sm response-card">
+        <Card className="shadow-sm response-card overflow-scroll">
             <Card.Body>
                 <Card.Text>{responseText}</Card.Text>
                 {
