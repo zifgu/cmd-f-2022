@@ -5,6 +5,8 @@ import "../styles/response_card.css";
 import { IoCopy } from "react-icons/io5";
 import { useState } from "react";
 import { Heading } from "./Common";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 export function Responses({ responses }) {
     return (
@@ -29,14 +31,14 @@ export function Responses({ responses }) {
     );
 }
 
-export function ResponseCard({ responseText, bodyText }) {
+export function ResponseCard({ responseText, bodyText: popupText }) {
     return (
         <Card className="shadow-sm response-card overflow-scroll">
             <Card.Body>
                 <Card.Text>{responseText}</Card.Text>
                 {
-                    bodyText ?
-                        <Card.Text>{bodyText}</Card.Text> : null
+                    popupText ?
+                        <Card.Text>{popupText}</Card.Text> : null
                 }
                 <CopyButton textToCopy={responseText}/>
             </Card.Body>
@@ -49,17 +51,26 @@ export function CopyButton({ textToCopy }) {
 
     return (
         <>
-            <IoCopy
-                className="copy-button"
-                size={20}
-                onClick={async () => {
-                    await navigator.clipboard.writeText(textToCopy);
+            <OverlayTrigger
+                placement="right"
+                delay={{ show: 200, hide: 400 }}
+                overlay={
+                    <Tooltip id="copy-tooltip">Copy this response!</Tooltip>
+                }
+            >
+                <span
+                    className="copy-button px-1"
+                    onClick={async () => {
+                        await navigator.clipboard.writeText(textToCopy);
 
-                    setCopied(true);
+                        setCopied(true);
 
-                    setTimeout(() => setCopied(false), 2000);
-                }}
-            />
+                        setTimeout(() => setCopied(false), 2000);
+                    }}
+                >
+                    <IoCopy />
+                </span>
+            </OverlayTrigger>
             {
                 copied ?
                     <span className="small mx-2 opacity-50" style={{ display: "inline-block" }}>
