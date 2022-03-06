@@ -58,7 +58,7 @@ export function AppMain({ colorChanged, colorScheme }) {
 
         const addResponse = (resp, type) => {
             // Only display non-empty responses
-            if (resp.length > 1) {
+            if (resp.length > 2) {
                 const obj = {
                     text: resp,
                     type: type,
@@ -75,10 +75,6 @@ export function AppMain({ colorChanged, colorScheme }) {
                 newResponses.push(obj);
             }
 
-            newResponses.push({
-                text: resp,
-                type: type,
-            });
         }
 
         await Promise.all([
