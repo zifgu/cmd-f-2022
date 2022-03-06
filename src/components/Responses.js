@@ -2,11 +2,13 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 import "../styles/response_card.css";
-import { IoCopy } from "react-icons/io5";
 import { useState } from "react";
 import { Heading } from "./Common";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { responseTypeInfo } from "./AppMain";
+import Popover from "react-bootstrap/Popover";
+import Button from "react-bootstrap/Button";
 
 export function Responses({ responses }) {
     return (
@@ -19,9 +21,10 @@ export function Responses({ responses }) {
             <Row className="g-2 row-cols-2">
                 {
                     responses.map((res) => (
-                        <Col key={res}>
+                        <Col key={res.type}>
                             <ResponseCard
-                                responseText={res}
+                                responseText={res.text}
+                                responseType={res.type}
                             />
                         </Col>
                     ))
@@ -31,16 +34,31 @@ export function Responses({ responses }) {
     );
 }
 
-export function ResponseCard({ responseText, bodyText: popupText }) {
+export function ResponseCard({ responseText, responseType }) {
+    const popover = responseType ? (
+        <Popover>
+            <Popover.Header>
+                What is this response?
+            </Popover.Header>
+            <Popover.Body>
+                {responseTypeInfo[responseType].description}
+            </Popover.Body>
+        </Popover>
+    ): null;
+
     return (
         <Card className="shadow-sm response-card overflow-scroll">
             <Card.Body>
                 <Card.Text>{responseText}</Card.Text>
-                {
-                    popupText ?
-                        <Card.Text>{popupText}</Card.Text> : null
-                }
                 <CopyButton textToCopy={responseText}/>
+                <OverlayTrigger
+                    trigger="click"
+                    placement="right"
+                    overlay={popover}
+                    delay={{ show: 0, hide: 400 }}
+                >
+                    <Button variant="outline-dark" className="float-end">Learn more</Button>
+                </OverlayTrigger>
             </Card.Body>
         </Card>
     );
@@ -58,8 +76,9 @@ export function CopyButton({ textToCopy }) {
                     <Tooltip id="copy-tooltip">Copy this response!</Tooltip>
                 }
             >
-                <span
-                    className="copy-button px-1"
+                <Button
+                    variant="outline-dark"
+                    className="copy-button"
                     onClick={async () => {
                         await navigator.clipboard.writeText(textToCopy);
 
@@ -68,8 +87,8 @@ export function CopyButton({ textToCopy }) {
                         setTimeout(() => setCopied(false), 2000);
                     }}
                 >
-                    <IoCopy />
-                </span>
+                    Copy
+                </Button>
             </OverlayTrigger>
             {
                 copied ?

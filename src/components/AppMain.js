@@ -14,6 +14,27 @@ import {
 
 const { Configuration, OpenAIApi } = require("openai");
 
+// TODO: fill these in
+export const BASIC = "basic";
+export const PARAPHRASE = "paraphrase";
+export const FEELING = "feeling";
+export const EMOJI = "emoji";
+
+export const responseTypeInfo = {
+    [BASIC]: {
+        description: "We think this is one way you could reply in a regular conversation.",
+    },
+    [PARAPHRASE]: {
+        description: "Paraphrasing makes the other person feel validated and understood.",
+    },
+    [FEELING]: {
+        description: "Describe your feelings to promote a sense of connection.",
+    },
+    [EMOJI]: {
+        description: "Emojis can be a simple and powerful way to communicate.",
+    }
+};
+
 export function AppMain({ colorChanged }) {
     // Output feeling
     const [emotion, setEmotion] = useState(null);
@@ -33,10 +54,13 @@ export function AppMain({ colorChanged }) {
 
     const update = async (relationship, message) => {
         const newResponses = [];
-        const addResponse = (resp) => {
+        const addResponse = (resp, type) => {
             // Only display non-empty responses
             if (resp) {
-                newResponses.push(resp);
+                newResponses.push({
+                    text: resp,
+                    type: type,
+                });
             }
         }
 
@@ -58,18 +82,24 @@ export function AppMain({ colorChanged }) {
             // Query the basic response, then after we have it, get the emoji response
             getBasicResponse(openai, relationship, message)
                 .then((resp) => {
-                    addResponse(resp);
+                    addResponse(resp, BASIC);
                     return getEmojiResponse(openai, resp);
                 })
-                .then(addResponse),
+                .then((resp) => {
+                    addResponse(resp, EMOJI);
+                }),
 
             // Get the feeling response directly
             getFeelingResponse(openai, relationship, message)
-                .then(addResponse),
+                .then((resp) => {
+                    addResponse(resp, FEELING);
+                }),
 
             // Get the paraphrase response directly
             getParaphraseResponse(openai, message)
-                .then(addResponse),
+                .then((resp) => {
+                    addResponse(resp, PARAPHRASE);
+                }),
         ]);
 
         console.log(newResponses);
