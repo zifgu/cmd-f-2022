@@ -8,8 +8,7 @@ import {
     getEmoji,
     getEmojiResponse,
     getEmotion,
-    getFeelingResponse,
-    getParaphraseResponse
+    getFeelingResponse, getParaphraseResponse,
 } from "./GetEmotions";
 import { getHexCodeFromRGBArray, getRGBAFromRGBArray } from "./ColourScheme";
 
@@ -55,7 +54,27 @@ export function AppMain({ colorChanged, colorScheme }) {
 
     const update = async (relationship, message) => {
         const newResponses = [];
+        const triggered = /down|sad|depress|kill|suicid/.test(message);
+
         const addResponse = (resp, type) => {
+            // Only display non-empty responses
+            if (resp.length > 1) {
+                const obj = {
+                    text: resp,
+                    type: type,
+                };
+
+                if (triggered && type === FEELING) {
+                    obj.helpText = (
+                        <>
+                            Mental health help resources: <a href="https://cmha.bc.ca/mental-health/find-help/">https://cmha.bc.ca/mental-health/find-help/</a>
+                        </>
+                    );
+                }
+
+                newResponses.push(obj);
+            }
+
             newResponses.push({
                 text: resp,
                 type: type,
