@@ -4,30 +4,33 @@ import Col from "react-bootstrap/Col";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AppMain } from "./components/AppMain";
 import { Footer } from "./components/Footer";
-import { useState } from "react";
-import { getColourScheme, getHexCodeFromRGBArray } from "./components/ColourScheme";
+import React, { useState } from "react";
+import { getColourScheme } from "./components/ColourScheme";
+import withSplashScreen from './components/withSplashScreen';
 import { Header } from "./components/Header";
 
-const appName = "emPath";
-const appDescription = "Leveraging AI to detect emotional undertones.";
 export const defaultColor = "#FFECB3";
-export const defaultColorScheme = [[241,241,237],[225,193,151],[244,227,182],[199,134,96],[148,85,96]];
+export const defaultColorScheme = [
+    [237,244,244],[203,211,180],[245,231,184],[188,168,124],[131,125,105]
+];
 
-function App() {
+const appTitle = "Me, An Empath";
+const appDescription = "Leveraging AI to detect emotional undertones.";
+
+function AppInner() {
+    const [color, setColor] = useState(defaultColor);
+
     const [colorScheme, setColorScheme] = useState(defaultColorScheme);
 
     return (
-        <div className="d-flex flex-column min-vh-100"
-             style={{
-                 backgroundColor: getHexCodeFromRGBArray(colorScheme[2]),
-             }}
-        >
+        <div className="d-flex flex-column min-vh-100" style={{ backgroundColor: color, }}>
             <Container className="pb-3">
                 <Row className="justify-content-center">
                     <Col md={9}>
-                        <Header title={appName} subtitle={appDescription} colorScheme={colorScheme}/>
+                        <Header title={appTitle} subtitle={appDescription} colorScheme={colorScheme}/>
                         <AppMain
                             colorChanged={async (color) => {
+                                setColor(color);
                                 setColorScheme(await getColourScheme(color));
                             }}
                             colorScheme={colorScheme}
@@ -40,4 +43,5 @@ function App() {
     );
 }
 
-export default App;
+export default withSplashScreen(AppInner);
+

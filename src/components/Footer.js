@@ -4,7 +4,7 @@ import { getHexCodeFromRGBArray } from "./ColourScheme";
 const people = [
     {
         name: "Nicole",
-        url: "https://github.com/nicolelassetter",
+        url: "https://www.linkedin.com/in/nicole-lassetter-5767b51a3/",
     },
     {
         name: "Floria",
@@ -12,7 +12,7 @@ const people = [
     },
     {
         name: "Coco",
-        url: "https://github.com/cocowcy",
+        url: "https://linkedin.com/in/cocowcy",
     },
 ];
 
