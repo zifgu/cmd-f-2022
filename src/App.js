@@ -5,9 +5,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { AppMain } from "./components/AppMain";
 import { Footer } from "./components/Footer";
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import { getColourScheme } from "./components/ColourScheme";
+
+export const defaultColor = "#FFECB3";
 
 function App() {
-    const [color, setColor] = useState("#FFECB3");
+    const [color, setColor] = useState(defaultColor);
 
     return (
         <div className="d-flex flex-column min-vh-100" style={{ backgroundColor: color, }}>
@@ -18,6 +22,13 @@ function App() {
                     </Col>
                 </Row>
             </Container>
+            <Button
+                onClick={() => {
+                    getColourScheme(color);
+                }}
+            >
+                Testing
+            </Button>
             <Footer />
         </div>
     );
