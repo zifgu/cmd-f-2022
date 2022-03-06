@@ -6,6 +6,9 @@ import { AppMain } from "./components/AppMain";
 import { Footer } from "./components/Footer";
 import { useState } from "react";
 import { getColourScheme } from "./components/ColourScheme";
+import React, {Component, Fragment} from 'react';
+import { Route } from 'react-router-dom'
+import withSplashScreen from './components/withSplashScreen';
 
 export const defaultColor = "#FFECB3";
 export const defaultColorScheme = [
@@ -61,4 +64,16 @@ function App() {
     );
 }
 
-export default App;
+class App extends Component {
+    render() {
+        return (
+            <Fragment>
+                <div className="container-fluid">
+                    <Route path="/" exact component={AppInner} />
+                </div>
+            </Fragment>
+        );
+    }
+}
+
+export default withSplashScreen(AppInner);
