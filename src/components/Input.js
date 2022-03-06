@@ -31,6 +31,7 @@ export function Input({ onSubmit }) {
             </Col>
             <Col md={12} className="text-end">
                 <Button
+                    variant="dark"
                     className="mt-3"
                     onClick={() => onSubmit(relationship, message)}
                 >

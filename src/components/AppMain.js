@@ -15,10 +15,10 @@ import {
 const { Configuration, OpenAIApi } = require("openai");
 
 // TODO: fill these in
-export const BASIC = "basic";
-export const PARAPHRASE = "paraphrase";
-export const FEELING = "feeling";
-export const EMOJI = "emoji";
+export const BASIC = 0;
+export const PARAPHRASE = 1;
+export const FEELING = 2;
+export const EMOJI = 3;
 
 export const responseTypeInfo = {
     [BASIC]: {

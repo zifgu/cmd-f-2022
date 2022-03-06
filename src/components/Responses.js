@@ -20,7 +20,8 @@ export function Responses({ responses }) {
             </Row>
             <Row className="g-2 row-cols-2">
                 {
-                    responses.map((res) => (
+                    responses.sort((a, b) => a.type - b.type)
+                        .map((res) => (
                         <Col key={res.type}>
                             <ResponseCard
                                 responseText={res.text}
@@ -38,7 +39,7 @@ export function ResponseCard({ responseText, responseType }) {
     const popover = responseType ? (
         <Popover>
             <Popover.Header>
-                What is this response?
+                Why this response?
             </Popover.Header>
             <Popover.Body>
                 {responseTypeInfo[responseType].description}
@@ -68,7 +69,7 @@ export function CopyButton({ textToCopy }) {
     return (
         <>
             <OverlayTrigger
-                placement="right"
+                placement="bottom"
                 delay={{ show: 200, hide: 400 }}
                 overlay={
                     <Tooltip id="copy-tooltip">Copy this response!</Tooltip>
