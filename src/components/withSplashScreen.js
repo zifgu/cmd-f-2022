@@ -6,7 +6,7 @@ import '../styles/splash-screen.css';
 function LoadingMessage() {
     return (
         <div className="splash-screen">
-            Meet an empth
+            Meet an empath
             <div className="loading-dot">.</div>
         </div>
     );
