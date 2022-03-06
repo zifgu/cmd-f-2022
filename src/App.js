@@ -3,6 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AppMain } from "./components/AppMain";
+import { Footer } from "./components/Footer";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                     </Col>
                 </Row>
             </Container>
+            <Footer />
         </div>
     );
 }

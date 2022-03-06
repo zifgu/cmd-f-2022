@@ -50,9 +50,7 @@ export function MessageInput() {
                           }}
             />
             <Button className="mt-3"
-                    onClick={() => {
-                        updateEmotion();
-                    }}
+                    onClick={updateEmotion}
             >
                 Enter
             </Button>
