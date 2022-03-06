@@ -1,5 +1,5 @@
 function parseFeeling(relationType, textMessage) {
-    return `My ${relationType} said to me: ${textMessage}\n My ${relationType} is feeling:`;
+    return `My ${relationType} said to me: ${textMessage}\n Summarize their feeling in one word:`;
 }
 
 function parseEmoji(parsedFeeling) {
@@ -19,7 +19,7 @@ function generateFeelingResponse(relationType, textMessage) {
 }
 
 function generateParaphraseResponse(textMessage) {
-    return `Paraphrase this for a second-grade student:\n${textMessage}\n`;
+    return `Paraphrase this for a second-grade student, change pronouns to second person:\n${textMessage}\n`;
 }
 
 function getMoodColor(parsedEmotion) {
