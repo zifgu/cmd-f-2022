@@ -11,8 +11,8 @@ export function getColourScheme(mainColor) {
         const http = new XMLHttpRequest();
 
         http.onreadystatechange = function() {
-            if(http.readyState == 4) {
-                if (http.status == 200) {
+            if(http.readyState === 4) {
+                if (http.status === 200) {
                     const palette = JSON.parse(http.responseText).result;
                     console.log(palette);
 

@@ -1,4 +1,4 @@
-export function Header({ title, subtitle, colorScheme }) {
+export function Header({ title, subtitle }) {
     return (
         <header
             className="text-center pt-4 pb-3 my-3 border-bottom border-white"
